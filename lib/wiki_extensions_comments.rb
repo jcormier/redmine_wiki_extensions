@@ -28,6 +28,13 @@ module WikiExtensionsComments
       end
       page = obj.page if obj
 
+      # Emit the current wiki formatter's editor assets (jsToolBar for
+      # Textile, the CommonMark toolbar for Markdown, etc.) into the page
+      # head. The comment form below is built with render_to_string, whose
+      # separate view context discards content_for(:header_tags), so without
+      # this the comment editor's toolbar never initializes.
+      heads_for_wiki_formatter
+
       num = rand(10000)
       area_id = "add_comment_area_#{num}"
       div_id = "add_comment_form_div#{num}"
