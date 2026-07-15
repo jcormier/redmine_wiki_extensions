@@ -9,7 +9,7 @@ class WikiExtensionsCommentsMailer < Mailer
     # Send notification to watchers and author of wiki page
     users = wiki_page.watchers.collect { |watcher|watcher.user } | wiki_page.content.notified_users
     users.each do |user|
-      wiki_commented(user, comment, wiki_page).deliver_now
+      wiki_commented(user, comment, wiki_page).deliver_later
     end
   end
 
